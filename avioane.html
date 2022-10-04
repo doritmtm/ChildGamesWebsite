@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#DED29A;">
+<c id="but" onclick="butpress();" style="position:absolute;top:-200px;left:200px;width:100px;height:25px;border-style:solid;border-width:10px;border-color:#00FF00;">Show!!!</c>
+<c id="butrot" onclick="butrot();" style="position:absolute;top:50px;left:200px;width:50px;height:25px;border-style:solid;border-width:5px;border-color:#00FF00;">Rotate</c>
+<b id="plr" style="position:absolute;top:0px;left:0px;color:#000000;font-size:20px;">Player 1</b>
+<b style="position:absolute;top:50px;left:850px;color:#000000;font-size:20px;">You hit him!!</b>
+<b style="position:absolute;top:50px;left:800px;background-color:#00FF00;width:25px;height:25px;"></b>
+<b style="position:absolute;top:100px;left:850px;color:#000000;font-size:20px;">You got hit!!</b>
+<b style="position:absolute;top:100px;left:800px;background-color:#FF0000;width:25px;height:25px;"></b>
+<b style="position:absolute;top:150px;left:850px;color:#000000;font-size:20px;">You missed!!</b>
+<b style="position:absolute;top:150px;left:800px;background-color:#FFFF00;width:25px;height:25px;"></b>
+<b style="position:absolute;top:200px;left:850px;color:#000000;font-size:20px;">He missed!!</b>
+<b style="position:absolute;top:200px;left:800px;background-color:#0000FF;width:25px;height:25px;"></b>
+<div id="mainedit" style="position:absolute;top:100px;left:100px;"></div>
+<div id="spawner0" style="position:absolute;top:100px;left:100px;display:none;"></div>
+<div id="spawner1" style="position:absolute;top:100px;left:100px;display:none;"></div>
+<div id="spawner2" style="position:absolute;top:100px;left:100px;display:none;"></div>
+<script>
+var plrel=document.getElementById("plr");
+var el0=document.getElementById("spawner0");
+var el1=document.getElementById("spawner1");
+var el2=document.getElementById("spawner2");
+var edt=document.getElementById("mainedit");
+var but=document.getElementById("but");
+var butro=document.getElementById("butrot");
+var lns=10,cls=13,wdh=50,bwdh=2,plr0=new Array(),plr1=new Array(),nrp=1,nr1=12,nr2=12,rot=0,nr=0,ok=0,ingr=5;
+for(i=0;i<lns;i++)
+{
+	plr0[i]=new Array();
+	plr1[i]=new Array();
+}
+var chars=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+function showrotplane()
+{
+    el2.innerHTML="";
+    el2.style.display="";
+    if(rot==0)
+    {
+        //el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i+300)+"px;left:"+(wdh*j+wdh*cls)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*0+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*3+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*(-1)+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+    }
+    if(rot==1)
+    {
+        //el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i+300)+"px;left:"+(wdh*j+wdh*cls)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*(-1)+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*0+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*2+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+    }
+    if(rot==2)
+    {
+        //el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i+300)+"px;left:"+(wdh*j+wdh*cls)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*0+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*3+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*(-1)+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+    }
+    if(rot==3)
+    {
+        //el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i+300)+"px;left:"+(wdh*j+wdh*cls)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*0+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*2+230)+"px;left:"+(wdh*0+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*2+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*(-1)+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+        el2.innerHTML+="<a style=\"position:absolute;top:"+(wdh*1+230)+"px;left:"+(wdh*1+wdh*cls+100)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+    }
+}
+function butrot()
+{
+	rot=rot+1;
+	if(rot==4)
+	{
+		rot=0;
+	}
+    showrotplane();
+}
+function gover()
+{
+	plr.innerHTML+=" Wins!!";
+}
+function shoot(i,j)
+{
+	var okk=0;
+	var nme0="shoot"+i+"a"+j+"b1",nme1="shoot"+i+"a"+j+"b2";
+	var els0=document.getElementById(nme0),els1=document.getElementById(nme1);
+	if(nrp==1)
+	{
+		if(plr1[i][j]==1)
+		{
+			els0.style.borderColor="#00FF00";
+			els1.style.borderColor="#FF0000";
+			plr1[i][j]=2;
+			nr1=nr1-1;
+			if(nr1==0)
+			{
+				gover();
+				okk=1;
+			}
+		}
+		if(plr1[i][j]==0)
+		{
+			els0.style.borderColor="#FFFF00";
+			els1.style.borderColor="#0000FF";
+			plr1[i][j]=3;
+		}
+	}
+	else
+	{
+		if(plr0[i][j]==1)
+		{
+			els1.style.borderColor="#00FF00";
+			els0.style.borderColor="#FF0000";
+			plr0[i][j]=2;
+			nr2=nr2-1;
+			if(nr2==0)
+			{
+				gover();
+				okk=1;
+			}
+		}
+		if(plr0[i][j]==0)
+		{
+			els1.style.borderColor="#FFFF00";
+			els0.style.borderColor="#0000FF";
+			plr0[i][j]=3;
+		}
+	}
+	if(okk==0)
+	{
+		switchplr();
+	}
+}
+function stopshow(i,j)
+{
+	var elm,nme;
+	if(rot==0)
+		{
+			if(j>=1)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			}
+		}
+		if(rot==1)
+		{
+			if(j>=3 && i>=1)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j-2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j-3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			}
+		}
+		if(rot==2)
+		{
+			if(i>=3 && j>=1)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			}
+		}
+		if(rot==3)
+		{
+			if(i>=1)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j+2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+i+"a"+(j+3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#000000";
+			}
+		}
+}
+function showplane(i,j)
+{
+ 	var elm,nme;
+	if(rot==0)
+		{
+			if(j>=1 && j<=cls-3 && i<=lns-5)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			}
+		}
+		if(rot==1)
+		{
+			if(j>=3 && i>=1 && j<=cls-1 && i<=lns-3)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j-2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j-3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			}
+		}
+		if(rot==2)
+		{
+			if(i>=3 && j>=1 && i<=lns-2 &&  j<=cls-3)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			}
+		}
+		if(rot==3)
+		{
+			if(i>=1 && i<=lns-3 && j<=cls-5)
+			{
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j+2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+i+"a"+(j+3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#00FF00";
+			}
+		}
+}
+function edtchg()
+{
+	nr=0;
+	if(ok==0)
+	{
+		ok=1;
+		edt.innerHTML="";nrp=2;
+		plr.innerHTML="Player "+nrp;
+		buildeditpl(edt,plr1,2);
+	}
+	else
+	{
+		edt.innerHTML="";
+		edt.style.display="none";
+		but.style.top="200px";
+		nrp=1;
+		butro.style.display="none";
+        el2.innerHTML="";
+        el2.style.display="none";
+		plr.innerHTML="Player "+nrp;
+	}
+}
+function putplaneaux(elm)
+{
+	edt.innerHTML+="<a style=\"position:absolute;top:"+elm.style.top+";left:"+elm.style.left+";width:"+elm.style.width+";height:"+elm.style.height+";border-style:solid;border-width:"+bwdh+"px;border-color:#FFFFFF;\">";
+}
+function putplane(i,j)
+{
+	var nme,elm;
+	if(nrp==1)
+	{
+		if(rot==0)
+		{
+			plr0[i][j]=1;
+			plr0[i+1][j]=1;
+			plr0[i+2][j]=1;
+			plr0[i+3][j]=1;
+			plr0[i+1][j-1]=1;
+			plr0[i+1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+2)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+3)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			
+		}
+		if(rot==1)
+		{
+			plr0[i][j]=1;
+			plr0[i][j-1]=1;
+			plr0[i][j-2]=1;
+			plr0[i][j-3]=1;
+			plr0[i-1][j-1]=1;
+			plr0[i+1][j-1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-2)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-3)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+		if(rot==2)
+		{
+			plr0[i][j]=1;
+			plr0[i-1][j]=1;
+			plr0[i-2][j]=1;
+			plr0[i-3][j]=1;
+			plr0[i-1][j-1]=1;
+			plr0[i-1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-2)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-3)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+		if(rot==3)
+		{
+			plr0[i][j]=1;
+			plr0[i][j+1]=1;
+			plr0[i][j+2]=1;
+			plr0[i][j+3]=1;
+			plr0[i-1][j+1]=1;
+			plr0[i+1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+2)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+3)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+	}
+	if(nrp==2)
+	{
+		if(rot==0)
+		{
+			plr1[i][j]=1;
+			plr1[i+1][j]=1;
+			plr1[i+2][j]=1;
+			plr1[i+3][j]=1;
+			plr1[i+1][j-1]=1;
+			plr1[i+1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+2)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+3)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+		if(rot==1)
+		{
+			plr1[i][j]=1;
+			plr1[i][j-1]=1;
+			plr1[i][j-2]=1;
+			plr1[i][j-3]=1;
+			plr1[i-1][j-1]=1;
+			plr1[i+1][j-1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j-3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-2)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j-3)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+		if(rot==2)
+		{
+			plr1[i][j]=1;
+			plr1[i-1][j]=1;
+			plr1[i-2][j]=1;
+			plr1[i-3][j]=1;
+			plr1[i-1][j-1]=1;
+			plr1[i-1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-2)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-3)+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j-1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-2)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-3)+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j-1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+		if(rot==3)
+		{
+			plr1[i][j]=1;
+			plr1[i][j+1]=1;
+			plr1[i][j+2]=1;
+			plr1[i][j+3]=1;
+			plr1[i-1][j+1]=1;
+			plr1[i+1][j+1]=1;
+			nme="edit"+i+"a"+j;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+2);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+i+"a"+(j+3);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i-1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="edit"+(i+1)+"a"+(j+1);
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+j+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+2)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+i+"a"+(j+3)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i+1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+			nme="shoot"+(i-1)+"a"+(j+1)+"b"+nrp;
+			elm=document.getElementById(nme);
+			elm.style.borderColor="#FFFFFF";putplaneaux(elm);
+		}
+	}
+	nr=nr+1;
+	if(nr==2)
+	{
+		edtchg();
+	}
+}
+function buildpl(el,plr,nrpp)
+{
+	for(i=0;i<lns;i++)
+	{
+		for(j=0;j<cls;j++)
+		{
+			if(i==0)
+			{
+				if(j==0)
+				{
+					j=j+1;
+				}
+				el.innerHTML+="<a style=\"position:absolute;top:0px;left:"+(wdh*j)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\">"+chars[j-1]+"</a>";
+			}
+			else
+			{
+				if(j==0)
+				{
+					el.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i)+"px;left:0px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\">"+(i-1)+"</a>";
+				}
+				else
+				{
+				el.innerHTML+="<a id=\"shoot"+(i-1)+"a"+(j-1)+"b"+nrpp+"\" onclick=\"shoot("+(i-1)+","+(j-1)+");\" style=\"position:absolute;top:"+(wdh*i)+"px;left:"+(wdh*j)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+				}
+			}
+		}
+	}
+}
+function buildeditpl(el,plr,nrpp)
+{
+    rot=0;
+    showrotplane();
+	for(i=0;i<=lns;i++)
+	{
+		for(j=0;j<cls;j++)
+		{
+			plr[i][j]=0;
+			if(i==0)
+			{
+				if(j==0)
+				{
+					j=j+1;
+				}
+				el.innerHTML+="<a style=\"position:absolute;top:0px;left:"+(wdh*j)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\">"+chars[j-1]+"</a>";
+			}
+			else
+			{
+				if(j==0)
+				{
+					el.innerHTML+="<a style=\"position:absolute;top:"+(wdh*i)+"px;left:0px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\">"+(i-1)+"</a>";
+				}
+				else
+				{
+				el.innerHTML+="<a id=\"edit"+(i-1)+"a"+(j-1)+"\" onclick=\"putplane("+(i-1)+","+(j-1)+");\" onmouseover=\"showplane("+(i-1)+","+(j-1)+");\" onmouseout=\"stopshow("+(i-1)+","+(j-1)+");\" style=\"position:absolute;top:"+(wdh*i)+"px;left:"+(wdh*j)+"px;width:"+wdh+"px;height:"+wdh+"px;border-style:solid;border-width:"+bwdh+"px;border-color:#000000;\"></a>";
+				}
+			}
+		}
+	}
+}
+buildpl(el0,plr0,1);
+buildpl(el1,plr1,2);
+buildeditpl(edt,plr0,1);
+function butpress()
+{
+	if(nrp==2)
+	{
+		el1.style.display="";
+	}
+	else
+	{
+		el0.style.display="";
+	}
+	but.style.top="-200px";
+}
+function switchplr()
+{
+	if(nrp==2)
+	{
+		nrp=1;
+		el1.style.display="none";
+	}
+	else
+	{
+		nrp=2;
+		el0.style.display="none";
+	}
+	but.style.top="200px";
+	plr.innerHTML="Player "+nrp;
+}
+</script>
+</body>
+</html>

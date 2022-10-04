@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#DED29A;color:#0000FF;">
+<img src="TTT_background.gif" style="position:absolute;top:100px;left:465px;">
+<style>
+a.chk{width:81px;height:81px;background-color:#DED29A;font-size:55px;text-align:center;}
+a.chc{width:97px;height:81px;background-color:#DED29A;font-size:55px;text-align:center;}
+div.pa{position:absolute;top:0px;left:0px;}
+div.pb{position:absolute;top:20px;left:0px;}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+</style>
+<a href="javascript:put(1)" class="chk" id="rezult0" style="position:absolute;top:109px;left:470px;"/>
+<a href="javascript:put(2)" class="chk" id="rezult1" style="position:absolute;top:203px;left:470px;"/>
+<a href="javascript:put(3)" class="chk" id="rezult2" style="position:absolute;top:297px;left:470px;"/>
+<a href="javascript:put(4)" class="chc" id="rezult3" style="position:absolute;top:109px;left:563px;"/>
+<a href="javascript:put(5)" class="chc" id="rezult4" style="position:absolute;top:201px;left:561px;"/>
+<a href="javascript:put(6)" class="chc" id="rezult5" style="position:absolute;top:294px;left:563px;"/>
+<a href="javascript:put(7)" class="chc" id="rezult6" style="position:absolute;top:109px;left:672px;"/>
+<a href="javascript:put(8)" class="chc" id="rezult7" style="position:absolute;top:203px;left:669px;"/>
+<a href="javascript:put(9)" class="chc" id="rezult8" style="position:absolute;top:297px;left:672px;"></a>
+<a id="rezult9" style="position:absolute;left:162px;top:162px;font-size:30px;"></a>
+<a id="rezult12" style="position:absolute;left:862px;top:212px;font-size:30px;color:#00AA00;text-align:center;"></a>
+<a id="rezult13" style="position:absolute;left:852px;top:302px;font-size:30px;color:#FF0000;text-align:center;"></a>
+<button type="button" onClick="javascript:rst()" style="position:absolute;top:500px;left:456px;text-align:center;">Reset Game</button>
+<button type="button" id="rezult10" onClick="javascript:prstf()" style="position:absolute;top:450px;left:456px;text-align:center;">Reset Forever</button>
+<button type="button" id="rezult11" onClick="javascript:swlf()" style="position:absolute;top:450px;left:616px;text-align:center;">Count Wins&Losses</button>
+<button type="button" onClick="javascript:rstwl()" style="position:absolute;top:500px;left:616px;text-align:center;">Reset Count Wins&Losses</button>
+<button type="button" id="rezult15" onClick="javascript:chpls()" style="position:absolute;top:550px;left:616px;text-align:center;">Play With X</button>
+<button type="button" id="rezult14" onClick="javascript:ebotn()" style="position:absolute;top:550px;left:456px;text-align:center;">Stop BOT</button>
+<script type="text/javascript">
+var cnfg=new Array();
+var pls=["O","X","0000FF","FF0000"];
+var nnt=pls[0];
+var be=1;
+var nm=0;
+var wns=0;
+var lss=0;
+var plss=0;
+var nnnmmm=0;
+var swl=0;
+var wonn=0;
+var sme=1;
+var nrd=1;
+var obj=new Array();
+for(i=0;i<16;i++){
+cnfg[i+1]=0;
+obj[i]=document.getElementById("rezult"+i);
+}
+if(nm==1){
+if(sme==1){
+if(be==1){
+bott();
+}
+}
+}
+function chpls(){
+var plsss=plss;
+if(plsss==0){
+plss=1;
+nnt="X";
+pls[0]="X";
+pls[1]="O";
+pls[2]="FF0000";
+pls[3]="0000FF";
+obj[15].innerHTML="Play With O";
+}
+if(plsss==1){
+plss=0;
+nnt="O";
+pls[1]="X";
+pls[0]="O";
+pls[3]="FF0000";
+pls[2]="0000FF";
+obj[15].innerHTML="Play With X";
+}
+rst();
+}
+function put(nr){
+sme=0;
+var nnm=nm;
+var wonnn=wonn;
+if(wonnn==0){
+if(cnfg[nr]==0){
+if(nnm==0){
+nm=1;
+var nnmm=pls[0];
+var col=pls[2];
+}
+if(nnm==1){
+nm=0;
+var nnmm=pls[1];
+var col=pls[3];
+}
+cnfg[nr]=nnmm;
+obj[nr-1].innerHTML="<div style=\"color:#"+col+";\">"+cnfg[nr]+"</div>";
+if(be==1){
+bott();
+}
+if(be==0){
+won(0,[1,0,2,0,3,0]);won(0,[4,0,5,0,6,0]);won(0,[7,0,8,0,9,0]);won(0,[1,0,4,0,7,0]);won(0,[2,0,5,0,8,0]);won(0,[3,0,6,0,9,0]);won(0,[1,0,5,0,9,0]);won(0,[7,0,5,0,3,0]);
+won(1,[1,1,2,1,3,1]);won(1,[4,1,5,1,6,1]);won(1,[7,1,8,1,9,1]);won(1,[1,1,4,1,7,1]);won(1,[2,1,5,1,8,1]);won(1,[3,1,6,1,9,1]);won(1,[1,1,5,1,9,1]);won(1,[7,1,5,1,3,1]);
+nowon();
+}
+}
+}
+}
+function rst(){
+nm=0;
+wonn=0;
+for(a=0;a<10;a++){
+cnfg[a+1]=0;
+obj[a].innerHTML="";
+}
+var nnrd=nrd;
+if(nnrd==1){
+nrd=0;
+nm=0;
+}
+if(nnrd==0){
+nrd=1;
+sme=1;
+nm=1;
+}
+if(nm==1){
+if(sme==1){
+if(be==1){
+bott();
+}
+}
+}
+}
+function prstf(){
+var nnmmm=nnnmmm;
+if(nnmmm==0){
+nnnmmm=1;
+obj[10].innerHTML="Stop Reset Forever";
+}
+if(nnmmm==1){
+nnnmmm=0;
+obj[10].innerHTML="Reset Forever";
+}
+rst();
+}
+function swlf(){
+var swll=swl;
+if(swll==0){
+swl=1;
+obj[11].innerHTML="Stop Count Wins&Losses";
+obj[13].innerHTML="Losses:<br>"+lss;
+obj[12].innerHTML="Wins:<br>"+wns;
+}
+if(swll==1){
+swl=0;
+obj[11].innerHTML="Count Wins&Losses";
+obj[13].innerHTML="";
+obj[12].innerHTML="";
+}
+}
+function rstwl(){
+lss=0;
+wns=0;
+obj[13].innerHTML="Losses:<br>"+lss;
+obj[12].innerHTML="Wins:<br>"+wns;
+}
+function ebotn(){
+var bee=be;
+if(bee==1){
+be=0;
+obj[14].innerHTML="Enable BOT";
+}
+if(bee==0){
+be=1;
+obj[14].innerHTML="Stop BOT";
+}
+}
+function act(nt,ifp){
+var nmm=nm;
+if(ifp[1]==1){ifp[1]=pls[0];}
+if(ifp[1]==2){ifp[1]=pls[1];}
+if(cnfg[ifp[0]]==ifp[1]){
+if(nmm==1){
+cnfg[nt]=pls[1];
+nm=0;
+obj[nt-1].innerHTML="<div style=\"color:#"+pls[3]+";\">"+cnfg[nt]+"</div>";
+}
+}
+}
+function act1(nt,ifp){
+var nmm=nm;
+if(ifp[1]==1){ifp[1]=pls[0];}if(ifp[3]==1){ifp[3]=pls[0];}
+if(ifp[1]==2){ifp[1]=pls[1];}if(ifp[3]==2){ifp[3]=pls[1];}
+if(cnfg[ifp[0]]==ifp[1] && cnfg[ifp[2]]==ifp[3]){
+if(nmm==1){
+cnfg[nt]=pls[1];
+nm=0;
+obj[nt-1].innerHTML="<div style=\"color:#"+pls[3]+";\">"+cnfg[nt]+"</div>";
+}
+}
+}
+function act2(nt,ifp){
+var nmm=nm;
+if(ifp[1]==1){ifp[1]=pls[0];}if(ifp[3]==1){ifp[3]=pls[0];}if(ifp[5]==1){ifp[5]=pls[0];}
+if(ifp[1]==2){ifp[1]=pls[1];}if(ifp[3]==2){ifp[3]=pls[1];}if(ifp[5]==2){ifp[5]=pls[1];}
+if(cnfg[ifp[0]]==ifp[1] && cnfg[ifp[2]]==ifp[3] && cnfg[ifp[4]]==ifp[5]){
+if(nmm==1){
+cnfg[nt]=pls[1];
+nm=0;
+obj[nt-1].innerHTML="<div style=\"color:#"+pls[3]+";\">"+cnfg[nt]+"</div>";
+}
+}
+}
+function won(nt,ifp){
+var nnnmm=nnnmmm;
+var lsss=lss;
+var wnss=wns;
+var swll=swl;
+var wonnn=wonn;
+if(ifp[1]==0){ifp[1]=pls[0];}if(ifp[3]==0){ifp[3]=pls[0];}if(ifp[5]==0){ifp[5]=pls[0];}
+if(ifp[1]==1){ifp[1]=pls[1];}if(ifp[3]==1){ifp[3]=pls[1];}if(ifp[5]==1){ifp[5]=pls[1];}
+if(cnfg[ifp[0]]==ifp[1] && cnfg[ifp[2]]==ifp[3] && cnfg[ifp[4]]==ifp[5]){
+if(nt==1){
+lss=lsss+1;
+obj[9].innerHTML="<div style=\"color:#FF0000;text-align:center;\">You played with "+nnt+"<br>You Lost!</div>";
+}
+if(nt==0){
+wns=wnss+1;
+obj[9].innerHTML="<div style=\"color:#00AA00;text-align:center;\">You played with "+nnt+"<br>You Won!</div>";
+nm=0;
+}
+if(nnnmm==1){
+setTimeout("rst()",2000);
+}
+if(swll==1){
+obj[13].innerHTML="Losses:<br>"+lss;
+obj[12].innerHTML="Wins:<br>"+wns;
+}
+wonn=1;
+}
+}
+function nowon(){
+var nnnmm=nnnmmm;
+if(cnfg[1]!=0 && cnfg[2]!=0 && cnfg[3]!=0 && cnfg[4]!=0 && cnfg[5]!=0 && cnfg[6]!=0 && cnfg[7]!=0 && cnfg[8]!=0 && cnfg[9]!=0){
+obj[9].innerHTML="<div style=\"color:#0000FF;text-align:center;\">You played with "+nnt+"<br>Nobody Won!</div>";
+if(nnnmm==1){
+setTimeout("rst()",2000);
+}
+}
+}
+function bott(){
+var arr=[1,4,7,2,8,3,6,9,7,9];
+var arrr=[1,2,3,4,5,6,7,8,9,1];
+var aarrr=[[3,7,3,7,7,3,3,3,7,7],[1,9,1,1,1,9,1,9,9,9]];
+var rndm=arr[Math.floor(Math.random()*10)];
+var rndmm=arrr[Math.floor(Math.random()*10)];
+var rnndm=[aarrr[0][Math.floor(Math.random()*10)],aarrr[1][Math.floor(Math.random()*10)],aarrr[0][Math.floor(Math.random()*10)],aarrr[1][Math.floor(Math.random()*10)]];
+won(0,[1,0,2,0,3,0]);won(0,[4,0,5,0,6,0]);won(0,[7,0,8,0,9,0]);won(0,[1,0,4,0,7,0]);won(0,[2,0,5,0,8,0]);won(0,[3,0,6,0,9,0]);won(0,[1,0,5,0,9,0]);won(0,[7,0,5,0,3,0]);
+act2(3,[1,2,2,2,3,0]);act2(6,[4,2,5,2,6,0]);act2(9,[7,2,8,2,9,0]);act2(1,[2,2,3,2,1,0]);act2(4,[5,2,6,2,4,0]);act2(7,[8,2,9,2,7,0]);act2(7,[1,2,4,2,7,0]);act2(8,[2,2,5,2,8,0]);
+act2(9,[3,2,6,2,9,0]);act2(1,[4,2,7,2,1,0]);act2(2,[5,2,8,2,2,0]);act2(3,[6,2,9,2,3,0]);act2(9,[1,2,5,2,9,0]);act2(3,[5,2,7,2,3,0]);act2(1,[5,2,9,2,1,0]);act2(7,[3,2,5,2,7,0]);
+act2(2,[1,2,3,2,2,0]);act2(5,[4,2,6,2,5,0]);act2(8,[7,2,9,2,8,0]);act2(4,[1,2,7,2,4,0]);act2(5,[2,2,8,2,5,0]);act2(6,[3,2,9,2,6,0]);
+act(5,[5,0]);act2(3,[1,1,2,1,3,0]);act2(6,[4,1,5,1,6,0]);act2(9,[7,1,8,1,9,0]);act2(1,[2,1,3,1,1,0]);act2(4,[5,1,6,1,4,0]);act2(7,[8,1,9,1,7,0]);
+act2(7,[1,1,4,1,7,0]);act2(8,[2,1,5,1,8,0]);act2(9,[3,1,6,1,9,0]);act2(1,[4,1,7,1,1,0]);act2(2,[5,1,8,1,2,0]);act2(3,[6,1,9,1,3,0]);act2(9,[1,1,5,1,9,0]);act2(3,[7,1,5,1,3,0]);
+act2(1,[9,1,5,1,1,0]);act2(7,[3,1,5,1,7,0]);act2(2,[1,1,3,1,2,0]);act2(5,[4,1,6,1,5,0]);act2(8,[7,1,9,1,8,0]);act2(4,[1,1,7,1,4,0]);act2(5,[2,1,8,1,5,0]);act2(6,[3,1,9,1,6,0]);
+act2(rnndm[0],[1,1,5,1,rnndm[0],0]);act2(rnndm[1],[7,1,5,1,rnndm[1],0]);act2(rnndm[2],[9,1,5,1,rnndm[2],0]);act2(rnndm[3],[3,1,5,1,rnndm[3],0]);
+act1(rndm,[5,1,rndm,0]);
+act(1,[1,0]);act(2,[2,0]);act(3,[3,0]);act(4,[4,0]);act(5,[5,0]);act(6,[6,0]);act(7,[7,0]);act(8,[8,0]);act(9,[9,0]);
+won(1,[1,1,2,1,3,1]);won(1,[4,1,5,1,6,1]);won(1,[7,1,8,1,9,1]);won(1,[1,1,4,1,7,1]);won(1,[2,1,5,1,8,1]);won(1,[3,1,6,1,9,1]);won(1,[1,1,5,1,9,1]);won(1,[7,1,5,1,3,1]);
+nowon();
+}
+</script>
+</body>
+</html>

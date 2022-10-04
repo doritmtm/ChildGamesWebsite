@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body style="overflow:hidden;background-color:#DED29A;">
+        <div id="ncursrt" style="height:50px;width:50px;background-color:#0000FF;position:absolute;left:20px;top:20px;z-index:545;" onmousedown="javascript:partad()" onmouseup="javascript:partfd()" onmousewheel="OnScrollDiv ()"></div>
+<div style="width:40000px;height:40000px;z-index:5847848485;" onmouseup="javascript:partfd()">
+    <br /><br /> 
+    <script type="text/javascript">
+var nr=0,winfo=50,hinfo=50,stnr=0,clck=0,diffx=0,diffy=0;
+function shownr(scrs){
+            var div = document.getElementById ("ncursrt");
+var vcr=2,wwinfo=winfo,hhinfo=hinfo;
+if(scrs==1){winfo=wwinfo+vcr;hinfo=hhinfo+vcr;}
+if(scrs==0){winfo=wwinfo-vcr;hinfo=hhinfo-vcr;}
+div.style.width=Math.floor(winfo)+"px";
+div.style.height=Math.floor(hinfo)+"px";
+}
+function execd(ev){
+var nbt = document.getElementById ("ncursrt"),clckk=clck;
+if(clckk==0){diffx=ev.clientX-nbt.style.left.split("px")[0];diffy=ev.clientY-nbt.style.top.split("px")[0];clck=1;}
+nbt.style.left=(ev.clientX-diffx)+"px";
+nbt.style.top=(ev.clientY-diffy)+"px";
+}
+function partad(){
+stnr=1;
+document.onmousemove=function(ev){execd(ev);};
+}
+function partfd(){
+stnr=0;
+clck=0;
+document.onmousemove="";
+}
+
+        function OnScrollDiv () {
+var evt=window.event
+    var delta=evt.detail? evt.detail*(-120) : evt.wheelDelta
+if(delta<0){
+var dircr=0;
+}
+if(delta>0){
+var dircr=1;
+}
+shownr(dircr);        
+}
+    </script>
+</body>
+</html>

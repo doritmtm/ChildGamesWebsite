@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#000000;color:#FFFFFF;">
+<a id="sq-1"/></a>
+<a id="nrdiv1" style="color:#000000;">2009</a>
+<a id="sq-2" style="position:absolute;top:200px;left:300px;"/></a>
+<a id="sq-4" style="position:absolute;top:300px;left:300px;color:#000000;"/></a>
+<a id="sq-3" style="position:absolute;top:150px;left:200px;"/>Here you write up to how much to generate prime numbers (must be bigger than 200):</a>
+<input type="text" id="dcer10" style="position:absolute;top:150px;left:800px;text-align:center;color:#0000FF;" size="3"/></input>
+<button type="button" onClick="javascript:spw()" style="position:absolute;left:863px;top:150px;text-align:center;color:#0000FF;"/>Generate!</button>
+<script type="text/javascript">
+var dobj=document.getElementById("sq-1");
+var cobj=document.getElementById("sq-2");
+var pobj=document.getElementById("sq-4");
+var tobj=document.getElementById("dcer10");
+var nrii=[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
+var nri=[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
+var nrdiv=0;
+function spw(){
+var nrprim=nrii.length;
+var htmm=dobj.innerHTML;
+if(htmm!=""){dobj.innerHTML="";}
+pobj.innerHTML="Incarcare...";
+dobj.style.color="#000000";
+for(b=0;b<nrii.length;b++){
+var htmmm=dobj.innerHTML;
+dobj.innerHTML=htmmm+nrii[b]+"<br>";
+}
+var proc;
+for(i=200;i<=tobj.value;i++){
+if((i/200)==Math.floor(i/200))
+{
+proc=Math.floor((i-200)/(tobj.value-200)*100);
+pobj.innerHTML="Incarcare   "+proc+"%";
+}
+var htm=dobj.innerHTML;
+var nrrrdiv=nrdiv;
+if(nrrrdiv>0){nrdiv=0;}
+for(a=0;a<nri.length;a++){
+var nrrdiv=nrdiv;
+if((i/nri[a])==Math.floor(i/nri[a])){
+nrdiv=nrrdiv+1;
+if(i==2009){
+var nobj=document.getElementById("nrdiv1");
+nobj.innerHTML=nobj.innerHTML+"  "+nri[a];
+}
+}
+}
+var nrrprim=nrprim;
+if((nrdiv+2)<3){
+dobj.innerHTML=htm+i+"<br>";
+nri[nri.length]=i;
+nrprim=nrrprim+1;
+}
+}
+if(nrdiv>0){
+cobj.innerHTML=nrprim+" prime numbers found.";
+}
+dobj.style.color="#FFFFFF";
+nri=[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
+}
+</script>
+</body>
+</html>

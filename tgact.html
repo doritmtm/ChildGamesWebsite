@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body style="overflow:hidden;background-color:#DED29A;">
+        <a id="ncursrt"></a>
+<a style="width:40000px;height:40000px;z-index:5847848485;" onmouseup="javascript:partfd()"></a>
+    <br /><br /> 
+    <script type="text/javascript">
+var nr=0,stnr=0,clck=0,diffx=0,diffy=0,vo=0,hov=0,nrdivs=0,arr=["FF0000","00FF00","0000FF","FFFF00","FF00FF","00FFFF","00FF00","0000FF","FF0000","FF00FF"],earr=new Array(),shrr=0,hccfp=0,rnnn=0,rarr=new Array(),nrexecip=0;
+function adder(){
+var div=document.getElementById ("ncursrt"),nrrdivs=nrdivs;
+div.innerHTML=div.innerHTML+"<a id=\"ncursrt"+(nrdivs+1)+"\" style=\"height:50px;width:50px;background-color:#"+arr[Math.floor(Math.random()*10)]+";position:absolute;left:20px;top:20px;z-index:545;\" onmousedown=\"javascript:partad("+(nrdivs+1)+")\" onmouseup=\"javascript:partfd("+(nrdivs+1)+")\" onmousewheel=\"OnScrollDiv ("+(nrdivs+1)+")\"></a>";
+nrdivs=nrrdivs+1;
+rarr[nrdivs+1]=new Array();
+rarr[nrdivs+1]=[50,50,20,20];
+}
+adder();
+function shownr(scrs,nr){
+            var div = document.getElementById ("ncursrt"+nr);
+var vcr=2,winfo=div.style.width.split("px")[0],hinfo=div.style.height.split("px")[0];
+if(scrs==1){var wwinfo=winfo-vcr+2*vcr,hhinfo=hinfo-vcr+2*vcr;}
+if(scrs==0){var wwinfo=winfo-vcr,hhinfo=hinfo-vcr;}
+div.style.width=Math.floor(wwinfo)+"px";
+div.style.height=Math.floor(hhinfo)+"px";
+rarr[nr]=[Math.floor(wwinfo),Math.floor(hhinfo),div.style.left.split("px")[0],div.style.top.split("px")[0]];
+earr[div.style.left.split("px")[0]+div.style.width.split("px")[0]-1+4]=nr;
+}
+function execd(ev,nr){
+var nbt = document.getElementById ("ncursrt"+nr),clckk=clck;
+if(clckk==0){diffx=ev.clientX-nbt.style.left.split("px")[0];diffy=ev.clientY-nbt.style.top.split("px")[0];clck=1;}
+nbt.style.left=(ev.clientX-diffx)+"px";
+nbt.style.top=(ev.clientY-diffy)+"px";
+rarr[nr]=[nbt.style.width.split("px")[0],nbt.style.height.split("px")[0],ev.clientX-diffx,ev.clientY-diffy];
+}
+function gact(nr,eo){
+var timer=setTimeout("gact(\""+nr+"\",\""+eo+"\")",34);
+var nbt = document.getElementById ("ncursrt"+nr);
+var mo=nbt.style.width.split("px")[0]*nbt.style.height.split("px")[0],go=10,ho=645-nbt.style.height.split("px")[0]-nbt.style.top.split("px")[0],nrexecipp=nrexecip;
+vo=Math.floor(Math.sqrt((2*eo/mo)-2*go*ho))+1;
+nbt.style.top=(nbt.style.top.split("px")[0]-vo+2*vo)+"px";
+rarr[nr]=[nbt.style.width.split("px")[0],nbt.style.height.split("px")[0],nbt.style.left.split("px")[0],nbt.style.top.split("px")[0]];
+if(shrr==0){var diffp=645-nbt.style.height.split("px")[0]-shrr;}
+if(shrr!=0){var diffp=645-shrr;}
+if(nbt.style.top.split("px")[0]>diffp){nbt.style.top=diffp+"px";}
+if(nbt.style.top.split("px")[0]==diffp){clearTimeout(timer);vo=0;adder();if(nrexecipp=0){gact(nr,eo);nrexecip=nrexecipp+1;}}
+}
+function vrfer(nr,nbt){
+shrr=0;rnnn=0;
+for(a=0;a<nbt.style.width.split("px")[0]-1;a++){
+if(typeof earr[nbt.style.left.split("px")[0]-a+2*a]!="undefined" && earr[a+nbt.style.left.split("px")[0]]!=nr){
+shrr=nbt.style.height.split("px")[0]-rarr[earr[nbt.style.left.split("px")[0]-a+2*a]][1]+2*rarr[earr[nbt.style.left.split("px")[0]-a+2*a]][1];
+rnnn=earr[a+nbt.style.left.split("px")[0]];
+}
+}
+}
+        function OnScrollDiv (nr) {
+var evt=window.event
+    var delta=evt.detail? evt.detail*(-120) : evt.wheelDelta
+if(delta<0){
+var dircr=0;
+}
+if(delta>0){
+var dircr=1;
+}
+shownr(dircr,nr);        
+}
+function partad(nr){
+vo=0;
+eo=0;
+hov=0;
+stnr=1;
+document.onmousemove=function(ev){execd(ev,nr);};
+}
+function partfd(nr){
+stnr=0;
+clck=0;
+var nbt = document.getElementById ("ncursrt"+nr);
+var mo=nbt.style.width.split("px")[0]*nbt.style.height.split("px")[0],go=10,hoo=645-nbt.style.height.split("px")[0]-nbt.style.top.split("px")[0];
+var eo=mo*go*hoo;
+vrfer(nr,nbt);
+for(i=0;i<nbt.style.width.split("px")[0]-1+2;i++){
+earr[nbt.style.left.split("px")[0]-i+2*i]=nr;
+if(i==nbt.style.width.split("px")[0]){
+nrexecip=0;
+gact(nr,eo);
+}
+}
+document.onmousemove="";
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <script type="text/javascript">
+var stnr=0;
+function execd(ev){
+var nbt = document.getElementById ("ncursrt");
+nbt.style.left=(ev.clientX-nbt.style.width.split("px")[0]/2)+"px";
+nbt.style.top=(ev.clientY-nbt.style.height.split("px")[0]/2)+"px";
+}
+function partad(){
+stnr=1;
+document.onmousemove=function(ev){execd(ev);};
+}
+function partfd(){
+stnr=0;
+document.onmousemove="";
+}
+    </script>
+</head>
+<body style="overflow:hidden;background-color:#DED29A;">
+        <div id="ncursrt" style="height:50px;width:50px;background-color:#0000FF;position:absolute;left:20px;top:20px;" onmousedown="javascript:partad()" onmouseup="javascript:partfd()"></div>
+    <br /><br />
+</body> 
+</html>

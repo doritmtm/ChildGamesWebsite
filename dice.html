@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:#DED29A;color:#0000FF;">
+<a id="dcer7" style="position:absolute;left:30px;top:300px;font-size:30px;text-align:center;"></a>
+<a id="dcer5" style="position:absolute;left:0px;top:100px;font-size:30px;color:#00AA00;text-align:center;"></a>
+<a id="dcer9" style="position:absolute;left:0px;top:0px;font-size:30px;color:#00AA00;text-align:center;">
+<input type="text" id="dcer10" style="position:absolute;top:180px;left:50px;text-align:center;color:#0000FF;" size="3" value="2"/></input>
+<button type="button" onClick="javascript:spw()" style="position:absolute;left:103px;top:180px;text-align:center;color:#0000FF;"/>SUBMIT</button></a>
+<a id="dcer0" style="position:absolute;left:862px;top:392px;font-size:30px;color:#00AA00;text-align:center;">Your Score:<br>0</a>
+<a id="dcer1" style="position:absolute;left:834px;top:482px;font-size:30px;color:#FF0000;text-align:center;">Opponent Score:<br>0</a>
+<button type="button" id="dcer4" onClick="javascript:dice()" style="position:absolute;top:380px;left:583px;text-align:center;width:100px;height:70px;font-size:25px;color:#0000FF;">DICE</button>
+<button type="button" onClick="javascript:rst()" style="position:absolute;top:480px;left:463px;text-align:center;width:100px;height:70px;font-size:25px;color:#0000FF;">RESET</button>
+<a style="position:absolute;top:40px;left:50px;text-align:center;color:#0000FF;" size="20" value="2"/>How many times you want to dice?</a>
+<a style="position:absolute;top:100px;left:50px;text-align:center;color:#0000FF;" size="20" value="2"/>How many dices you want to have?</a>
+<a style="position:absolute;top:160px;left:50px;text-align:center;color:#0000FF;" size="20" value="2"/>The bonus grade:</a>
+<input type="text" id="dcer2" style="position:absolute;top:60px;left:50px;text-align:center;color:#0000FF;" size="3" value="2"/></input>
+<input type="text" id="dcer6" style="position:absolute;top:120px;left:50px;text-align:center;color:#0000FF;" size="3" value="1"/></input>
+<button type="button" onClick="javascript:cnr()" style="position:absolute;left:103px;top:120px;text-align:center;color:#0000FF;"/>SUBMIT</button>
+<button type="button" id="dcer3" onClick="javascript:tfd()" style="position:absolute;top:480px;left:573px;text-align:center;width:250px;height:70px;font-size:25px;color:#0000FF;"/>
+<button type="button" id="dcer8" onClick="javascript:edt()" style="position:absolute;top:560px;left:463px;text-align:center;width:360px;height:70px;font-size:25px;color:#0000FF;"/>Disable Bonuses</button>
+<button type="button" onClick="javascript:smt()" style="position:absolute;left:103px;top:60px;text-align:center;color:#0000FF;"/>SUBMIT</button>
+<script type="text/javascript">
+var imgo=new Array();
+var imgd=new Array();
+var bon=new Array();
+var rrannd=new Array();
+var strr=new Array();
+var ed=1;
+var vv=0;
+var tt=2;
+var sbt=0;
+var pw=2;
+var spl=0;
+var wdh=0;
+var hgt=0;
+var ttt=0;
+var clck=0;
+var bb=0;
+var scr=[0,0];
+var rand=new Array();
+var nr=sbt*2;
+var nnr=nr/2;
+var nrr=Math.sqrt(nnr);
+if(nrr==Math.floor(nrr)){
+wdh=nrr;
+hgt=nrr;
+}
+var ar=[1,3,5,4,6,2,5,4,2,6];
+var arr=new Array();
+for(h=0;h<100;h++){
+arr[h]=ar[Math.floor(Math.random()*10)];
+}
+for(d=0;d<11;d++){
+imgd[d]=document.getElementById("dcer"+d);
+}
+for(m=0;m<2;m++){
+for(k=0;k<hgt;k++){
+for(l=0;l<wdh;l++){
+var mm=[550,730];
+var dhtm=imgd[5].innerHTML;
+imgd[5].innerHTML=dhtm+"<img id=\"dice"+(((wdh*k+l)*2)+m)+"\" style=\"position:absolute;left:"+(mm[m]-50*l)+"px;top:"+(200-50*k)+"px;\" src=\"dice"+arr[Math.floor(Math.random()*100)]+"b.gif\"/>";
+}
+} 
+}
+for(i=0;i<nr;i++){
+rand[i]=arr[Math.floor(Math.random()*100)];
+imgo[i]=document.getElementById("dice"+i);
+}
+imgd[3].innerHTML="Dice 2 Times";
+function cnr(){
+sbt=imgd[6].value;
+nr=sbt*2;
+var nnr=nr/2;
+var nrr=Math.sqrt(nnr);
+if(nrr==Math.floor(nrr)){
+wdh=nrr;
+hgt=nrr;
+spl=0;
+}
+if(nrr!=Math.floor(nrr)){
+wdh=Math.floor(nrr+1);
+hgt=Math.floor(nr/wdh);
+spl=(sbt-(wdh*hgt));
+}
+var ar=[1,3,5,4,6,2,5,4,2,6];
+var arr=new Array();
+imgd[5].innerHTML="";
+for(h=0;h<100;h++){
+arr[h]=ar[Math.floor(Math.random()*10)];
+}
+for(m=0;m<2;m++){
+for(k=0;k<hgt;k++){
+for(l=0;l<wdh;l++){
+var mm=[550,(630+50*wdh)];
+var dhtm=imgd[5].innerHTML;
+if((wdh*k+l+1)<=sbt){
+imgd[5].innerHTML=dhtm+"<img id=\"dice"+(((wdh*k+l)*2)+m)+"\" style=\"position:absolute;left:"+(mm[m]-50*l)+"px;top:"+(200-50*k)+"px;\" src=\"dice"+arr[Math.floor(Math.random()*100)]+"b.gif\"/>";
+}
+}
+} 
+}
+for(h=0;h<100;h++){
+arr[h]=ar[Math.floor(Math.random()*10)];
+}
+for(i=0;i<nr;i++){
+rand[i]=arr[Math.floor(Math.random()*100)];
+imgo[i]=document.getElementById("dice"+i);
+}
+rst();
+}
+function spw(){
+var tpwv=imgd[10].value;
+pw=tpwv;
+rst();
+}
+function edt(){
+var edd=ed;
+var pww=pw;
+if(edd==0){
+ed=1;
+imgd[8].innerHTML="Disable Bonuses";
+imgd[9].value=pww;
+}
+if(edd==1){
+ed=0;
+imgd[8].innerHTML="Enable Bonuses";
+imgd[9].value=pww;
+}
+}
+function smt(){
+var tval=imgd[2].value;
+tt=tval;
+imgd[3].innerHTML="Dice "+tt+" Times";
+}
+function tfd(){
+var tttt=tt;
+ttt=tttt;
+rst();
+}
+function hmn(str,wf){
+var aarrr=str.split(wf);
+var aaarrr=new Array();
+var scrr=0;
+for(t=0;t<aarrr.length;t++){
+aaarrr[t]=aarrr[t].split(wf);
+if(aaarrr[t]!=""){
+var jarr=aaarrr[t].join("");
+var scrrr=scrr;
+scrr=scrrr+jarr.length;
+}
+}
+return [(str.length-scrr)];
+}
+function dice(){
+var clcks=clck;
+if(ttt>clcks){
+for(e=0;e<100;e++){
+arr[e]=ar[Math.floor(Math.random()*10)];
+}
+for(w=0;w<2;w++){
+rrannd[w]=new Array();
+}
+for(a=0;a<nr;a++){
+rand[a]=arr[Math.floor(Math.random()*100)];
+imgo[a].src="dice.gif";
+var aa=a/2;
+if(aa==Math.floor(aa)){
+var aaa=0;
+}
+if(aa!=Math.floor(aa)){
+var aaa=1;
+}
+rrannd[aaa][a]=rand[a];
+}
+if(ed==1){
+var pww=pw;
+for(v=0;v<2;v++){
+for(u=0;u<6;u++){
+strr[v]=rrannd[v].join("");
+if(hmn(strr[v],(u+1))!=1){
+bon[u]=(u+1)*Math.pow(hmn(strr[v],(u+1)),pww);
+scr[v]=scr[v]+bon[u];
+}
+}
+}
+}
+for(b=0;b<nr;b++){
+var bbb=b/2;
+if(bbb==Math.floor(bbb)){
+bb=0;
+}
+if(bbb!=Math.floor(bbb)){
+bb=1;
+}
+scr[bb]=scr[bb]+rand[b];
+}
+setTimeout("dcer()", 500);
+clck=clcks+1;
+}
+if(ttt==(clcks+1)){
+imgd[4].style.left="-1243px";
+setTimeout("won()", 500);
+}
+}
+function won(){
+if(scr[0]>scr[1]){
+imgd[7].innerHTML="<div style=\"color:#00AA00;\">You Won!</div>";
+}
+if(scr[0]<scr[1]){
+imgd[7].innerHTML="<div style=\"color:#FF0000;\">You Lost!</div>";
+}
+if(scr[0]==scr[1]){
+imgd[7].innerHTML="<div style=\"color:#0000FF;\">Nobody Won!</div>";
+}
+}
+function dcer(){
+imgd[0].innerHTML="Your Score:<br>"+scr[0];
+imgd[1].innerHTML="Opponent Score:<br>"+scr[1];
+for(c=0;c<nr;c++){
+imgo[c].src="dice"+rand[c]+".gif";
+}
+}
+function rst(){
+var aarr=["Your","Opponent"];
+clck=0;
+imgd[7].innerHTML="";
+imgd[4].style.left="583px";
+for(f=0;f<2;f++){
+scr[f]=0;
+imgd[f].innerHTML=aarr[f]+" Score:<br>0";
+} 
+for(g=0;g<nr;g++){
+imgo[g].src="dice"+rand[g]+"b.gif";
+}
+}
+</script>
+</body>
+</html>

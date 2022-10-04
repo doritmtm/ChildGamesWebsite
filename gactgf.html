@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body style="overflow:hidden;background-color:#DED29A;">
+        <div id="ncursrt"></div>
+<div style="width:40000px;height:40000px;z-index:5847848485;" onmouseup="javascript:partfd()">
+    <br /><br /> 
+    <script type="text/javascript">
+var nr=0,winfo=50,hinfo=50,stnr=0,clck=0,diffx=0,diffy=0,vo=0,eo=0,hov=0,nrdivs=0;
+function adder(){
+var div=document.getElementById ("ncursrt"),nrrdivs=nrdivs;
+div.innerHTML=div.innerHTML+"<div id=\"ncursrt"+(nrdivs+1)+"\" style=\"height:50px;width:50px;background-color:#0000FF;position:absolute;left:20px;top:20px;z-index:545;\" onmousedown=\"javascript:partad("+(nrdivs+1)+")\" onmouseup=\"javascript:partfd("+(nrdivs+1)+")\" onmousewheel=\"OnScrollDiv ("+(nrdivs+1)+")\"></div>";
+nrdivs=nrrdivs+1;
+}
+adder();
+function partad(nr){
+vo=0;
+eo=0;
+hov=0;
+stnr=1;
+document.onmousemove=function(ev){execd(ev,nr);};
+}
+function partfd(nr){
+stnr=0;
+clck=0;
+var nbt = document.getElementById ("ncursrt"+nr),mo=nbt.style.width.split("px")[0]*nbt.style.height.split("px")[0],go=10,hoo=595-nbt.style.top.split("px")[0];
+eo=mo*go*hoo;
+gact(nr);
+document.onmousemove="";
+}
+
+        function OnScrollDiv (nr) {
+var evt=window.event
+    var delta=evt.detail? evt.detail*(-120) : evt.wheelDelta
+if(delta<0){
+var dircr=0;
+}
+if(delta>0){
+var dircr=1;
+}
+shownr(dircr,nr);        
+}
+function shownr(scrs,nr){
+            var div = document.getElementById ("ncursrt"+nr);
+var vcr=2,wwinfo=winfo,hhinfo=hinfo;
+if(scrs==1){winfo=wwinfo+vcr;hinfo=hhinfo+vcr;}
+if(scrs==0){winfo=wwinfo-vcr;hinfo=hhinfo-vcr;}
+div.style.width=Math.floor(winfo)+"px";
+div.style.height=Math.floor(hinfo)+"px";
+}
+function execd(ev,nr){
+var nbt = document.getElementById ("ncursrt"+nr),clckk=clck;
+if(clckk==0){diffx=ev.clientX-nbt.style.left.split("px")[0];diffy=ev.clientY-nbt.style.top.split("px")[0];clck=1;}
+nbt.style.left=(ev.clientX-diffx)+"px";
+nbt.style.top=(ev.clientY-diffy)+"px";
+}
+function gact(nr){
+var timer=setTimeout("gact(\""+nr+"\")",34);
+var nbt = document.getElementById ("ncursrt"+nr);
+var mo=nbt.style.width.split("px")[0]*nbt.style.height.split("px")[0],go=10,ho=595-nbt.style.top.split("px")[0];
+vo=Math.floor(Math.sqrt((2*eo/mo)-2*go*ho))+1;
+nbt.style.top=(nbt.style.top.split("px")[0]-vo+2*vo)+"px";
+if(nbt.style.top.split("px")[0]>595){nbt.style.top="595px";}
+if(nbt.style.top.split("px")[0]==595){clearTimeout(timer);vo=0;adder();}
+}
+    </script>
+</body>
+</html>
